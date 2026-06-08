@@ -1,0 +1,8 @@
+node_modules
+dist
+media/*
+cookies/*
+.git
+.gitignore
+.env
+!.gitkeep
