@@ -100,6 +100,7 @@ class Command {
 
     async #loadEvents(){
         const eventsDir = path.join(this.#cmdDir, "events")
+        if (!fs.existsSync(eventsDir)) return
         for await (const eventFile of fs.readdirSync(eventsDir)){
             const event = await Event.createFromFile({ eventPath: path.join(eventsDir, eventFile), bot: this.#bot })
             this.#events.set(event.getName(), event)
