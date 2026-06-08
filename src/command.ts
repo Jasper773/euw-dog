@@ -73,6 +73,7 @@ class Command {
         const cmdFactory = (await import(commandPath)).default
         const cmdDir = commandPath.slice(0, commandPath.lastIndexOf("/"))
         const cmdData = await cmdFactory({ bot: bot, commandDir: cmdDir })
+        console.log(cmdData.name)
         return await Command.create({
             name: cmdData.name,
             description: cmdData.description,
