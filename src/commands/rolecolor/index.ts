@@ -1,8 +1,7 @@
 import { ChatInputCommandInteraction, ChannelType, MessageFlags, GuildMemberRoleManager } from "discord.js"
 
 import { Command } from "@/command.js"
-import { directories } from "@/domain.js"
-import pool from "@/database/database.js"
+import pool from "@/database.js"
 import Bot from "@/bot.js"
 
 const options = [{
