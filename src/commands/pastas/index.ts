@@ -116,8 +116,8 @@ export default (async ({ bot, commandDir }: { bot: Bot, commandDir: string }) =>
 
                 const selectedValue = interaction.values[0];
                 const content = pastas[parseInt(selectedValue)]
-                await replyMessage.edit({ 
-                    content: `Click the Copy (📄) Icon on the very right -------------------------↘ \n${content}` 
+                await replyMessage.edit({
+                    content: `Click the Copy (📄) Icon on the very right (the pastas look normal in game) ↘ \n${content}` 
                 })
             })
         },

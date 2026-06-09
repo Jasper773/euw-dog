@@ -13,7 +13,7 @@ const directories = {
     src: path.join(__dirname, "..", "src"),
     cmds: path.join(__dirname, "..", "src", "commands"),
     evs: path.join(__dirname, "..", "src", "events"),
-    db: path.join(__dirname, "..", "db"),
+    database: path.join(__dirname, "..", "src", "database"),
     media: path.join(__dirname, "..", "media")
 }
 

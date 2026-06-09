@@ -1,0 +1,8 @@
+node_modules
+dist
+media/*
+/src/commands/postvid/cookies/*
+bun.lock
+.git
+.env
+!.gitkeep

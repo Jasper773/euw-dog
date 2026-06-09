@@ -1,12 +1,13 @@
 import { ChatInputCommandInteraction, ChannelType, MessageFlags } from "discord.js"
 
 import { Command } from "@/command.js"
-import { directories } from "@/domain.js"
 import Bot from "@/bot.js"
 
 import fs from "fs"
+import path from "path"
+import { directories } from "@/domain.js"
 
-const filePath = `${directories.db}/niggerhunt_stats.json`
+const filePath = path.join(directories.database, "nhstats.json")
 
 export default (async ({ bot, commandDir }: { bot: Bot, commandDir: string }) => {
     return ({

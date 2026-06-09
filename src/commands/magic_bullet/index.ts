@@ -4,8 +4,8 @@ import { Command } from "@/command.js"
 import Bot from "@/bot.js"
 import fs from "fs"
 
-const filePath = `${directories.db}/niggerhunt_stats.json`
-const nhStats = JSON.parse(fs.readFileSync(`${directories.db}/niggerhunt_stats.json`, "utf-8"))
+const filePath = `${directories.database}/nhstats.json`
+const nhStats = JSON.parse(fs.readFileSync(`${directories.database}/nhstats.json`, "utf-8"))
 
 export default (async ({ bot, commandDir }: { bot: Bot, commandDir: string }) => {
     return ({
