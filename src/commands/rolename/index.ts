@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, ChannelType, MessageFlags, GuildMemberRoleManager } from "discord.js"
+import { ChatInputCommandInteraction, MessageFlags, GuildMemberRoleManager } from "discord.js"
 
 import { Command } from "@/command.js"
 import Bot from "@/bot.js"

@@ -1,6 +1,4 @@
-import { ChatInputCommandInteraction } from "discord.js"
-import { CommandOption } from "./command.js"
-import { spawn, exec, ChildProcessWithoutNullStreams } from "node:child_process"
+import { spawn, ChildProcessWithoutNullStreams } from "node:child_process"
 
 class SpawnProcess {
     private process!: ChildProcessWithoutNullStreams
