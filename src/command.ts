@@ -1,7 +1,5 @@
-import { ChatInputCommandInteraction, ApplicationCommandOptionType, ClientEvents } from "discord.js"
+import { ChatInputCommandInteraction, ApplicationCommandOptionType } from "discord.js"
 import { EventsMap } from "@/event.js"
-import { pathToFileURL } from "url"
-import { loadEventFromFile } from "@/event.js"
 import { Event } from "@/event.js"
 import Bot from "./bot.js"
 import path from "path"

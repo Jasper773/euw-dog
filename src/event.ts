@@ -40,9 +40,4 @@ class Event {
     onlyRunsOnce = () => this.#once
 }
 
-async function loadEventFromFile(eventPath: string, bot: Bot): Promise<Event> {
-    const eventFn = (await import(eventPath)).default
-    return eventFn(bot)
-}
-
-export { Event, EventsMap, EventFactory, EventObject, loadEventFromFile }
+export { Event, EventsMap, EventFactory, EventObject }

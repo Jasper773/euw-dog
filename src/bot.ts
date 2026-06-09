@@ -71,12 +71,12 @@ class Bot {
         })
     }
 
-    static async create(token: string, cmdsPath: string, eventsDir: string, intents: GatewayIntentBits[], partials: Partials[]){
+    static async create({ token, commandsDirPath, eventsDirPath, intents, partials } : { token: string, commandsDirPath: string, eventsDirPath: string, intents: GatewayIntentBits[], partials: Partials[] }){
         const client = new Client({ intents, partials })
         const rest = new REST({ version: "10" }).setToken(token)
         const bot = new Bot(client, rest)
-        await bot.#loadCommands(cmdsPath)
-        await bot.#loadEvents(eventsDir)
+        await bot.#loadCommands(commandsDirPath)
+        await bot.#loadEvents(eventsDirPath)
         await bot.#start(token)
         return bot
     }

@@ -9,19 +9,25 @@ const token = process.env.TOKEN
 if (!token) throw new Error("TOKEN not found in environment variables.")
 
 try {
-    await Bot.create(token, path.join(directories.src, "commands"), path.join(directories.src, "events"), [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildPresences,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.GuildExpressions,
-        GatewayIntentBits.MessageContent
-    ], [
-        Partials.Message,
-        Partials.Reaction
-    ])
+    await Bot.create({
+        token: token,
+        commandsDirPath: path.join(directories.src, "commands"),
+        eventsDirPath: path.join(directories.src, "events"),
+        intents: [
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildPresences,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.GuildMessageReactions,
+            GatewayIntentBits.GuildVoiceStates,
+            GatewayIntentBits.GuildExpressions,
+            GatewayIntentBits.MessageContent
+        ],
+        partials: [
+            Partials.Message,
+            Partials.Reaction
+        ]
+    })
 } catch (error) {
-    console.error("Failed to start bot:", error);
+    console.error("[ERROR] Failed to start bot:", error);
 }

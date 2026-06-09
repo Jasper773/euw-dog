@@ -1,9 +1,9 @@
 import { Message, Events } from "discord.js"
-import { EventFactory } from "@/event"
-import Bot from "@/bot"
+import { EventFactory } from "@/event.js"
+import Bot from "@/bot.js"
 
 export default ((bot: Bot) => ({
-    name: Events.MessageReactionAdd,
+    name: Events.MessageCreate,
     once: false,
     exec: async function(message: Message) {
         // if (message.author.bot || !message.reference) return
