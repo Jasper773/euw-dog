@@ -23,8 +23,8 @@ class VideoProcessor {
     #busy: boolean = false
     #count: number = 0
 
-    #onDataFunc: (data: string) => void = () => {}
-    #onErrorFunc: (data: string) => void = () => {}
+    #onDataFunc: (data: Buffer) => void = () => {}
+    #onErrorFunc: (data: Buffer) => void = () => {}
 
     constructor({ videoPath }: { videoPath: string }) {
         this.#videoPath = videoPath
@@ -32,8 +32,8 @@ class VideoProcessor {
         this.#stats = VideoProcessor.getMetadata(videoPath)
     }
 
-    onData(func: (data: string) => void) { this.#onDataFunc = func }
-    onError(func: (data: string) => void) { this.#onErrorFunc = func }
+    onData(func: (data: Buffer) => void) { this.#onDataFunc = func }
+    onError(func: (data: Buffer) => void) { this.#onErrorFunc = func }
 
     getVideoMetadata = () => this.#stats
 
@@ -96,7 +96,7 @@ class VideoProcessor {
             "-profile:v", "baseline", "-level", "3.0",
             "-pix_fmt", "yuv420p", "-tune", "film",
             "-c:a", "aac", "-b:a", "96k", "-ac", "1", "-ar", "24000",
-            "-map_metadata", "-1", "-preset", "veryslow",
+            "-map_metadata", "-1", "-preset", "ultrafast",
             "-movflags", "+faststart", "-progress", "-", "-y",
             this.#videoPath
         ])
@@ -121,7 +121,7 @@ class VideoProcessor {
                 "-y", "-i", this.#targetVideoPath,
                 "-c:v", "libx264", "-b:v", `${bitrateKbps}k`,
                 "-maxrate", `${bitrateKbps * 0.9}k`, "-bufsize", `${bitrateKbps * 2}k`,
-                "-pass", "1", "-passlogfile", logName, "-preset", "slow",
+                "-pass", "1", "-passlogfile", logName, "-preset", "ultrafast",
                 "-progress", "-", "-f", "null", "/dev/null"
             ])
             pass1.onData(this.#onDataFunc)
@@ -133,7 +133,7 @@ class VideoProcessor {
                 "-y", "-i", this.#targetVideoPath,
                 "-c:v", "libx264", "-b:v", `${bitrateKbps}k`,
                 "-maxrate", `${bitrateKbps * 0.9}k`, "-bufsize", `${bitrateKbps * 2}k`,
-                "-c:a", "aac", "-preset", "slow", "-progress", "-",
+                "-c:a", "aac", "-preset", "ultrafast", "-progress", "-",
                 "-pass", "2", "-passlogfile", logName, this.#videoPath
             ])
             pass2.onData(this.#onDataFunc)

@@ -31,6 +31,11 @@ export default [{
             { name: "Do not remove borders", value: "false" }
         ]
     }, {
+        name: "volume",
+        description: "Volume (0.0 - 2.0)",
+        type: ApplicationCommandOptionType.String,
+        required: false
+    }, {
         name: "speed",
         description: "Playback speed (0.1 - 2.0)",
         type: ApplicationCommandOptionType.String,

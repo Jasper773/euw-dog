@@ -1,4 +1,3 @@
-import { spawn } from "node:child_process"
 import { SpawnProcess } from "@/utils.js"
 
 export default class YTDLP {
@@ -7,8 +6,8 @@ export default class YTDLP {
     #singleVideo = true
     #cookies: string | undefined = undefined
 
-    #onDataFunc: (data: string) => void = () => {}
-    #onErrorFunc: (data: string) => void = () => {}
+    #onDataFunc: (data: Buffer) => void = () => {}
+    #onErrorFunc: (data: Buffer) => void = () => {}
 
     constructor({ cookies, agent, singleVideo, interval, max_interval }: { cookies?: string, agent?: string, singleVideo?: boolean, interval?: number, max_interval?: number } = {}) {
         if (cookies) this.#cookies = cookies
@@ -18,8 +17,8 @@ export default class YTDLP {
         if (singleVideo !== undefined) this.#singleVideo = singleVideo
     }
 
-    onData(func: (data: string) => void) { this.#onDataFunc = func }
-    onError(func: (data: string) => void) { this.#onErrorFunc = func }
+    onData(func: (data: Buffer) => void) { this.#onDataFunc = func }
+    onError(func: (data: Buffer) => void) { this.#onErrorFunc = func }
 
     async download(link: string, outputPath: string) {
         const sp = new SpawnProcess("yt-dlp", [
