@@ -163,8 +163,8 @@ class VideoProcessor {
         let closestDownResolution = VideoProcessor.getHighestLowerNumber(biggestResolution, resolutionPoints)
 
         return {
-            width: VideoProcessor.numberToEven(Math.floor(VideoProcessor.scaleDownResolution(width, biggestResolution, closestDownResolution))),
-            height: VideoProcessor.numberToEven(Math.floor(VideoProcessor.scaleDownResolution(height, biggestResolution, closestDownResolution)))
+            width: Math.floor(VideoProcessor.scaleDownResolution(width, biggestResolution, closestDownResolution)) & ~1,
+            height: Math.floor(VideoProcessor.scaleDownResolution(height, biggestResolution, closestDownResolution)) & ~1
         }
     }
 

@@ -65,6 +65,7 @@ You can react with ❌ to delete it.
             content: inputs.get("text") || " ",
             files: [outputPath]
         })
+
         instancesManager.freeInstance(instance)
     })
 })
@@ -82,7 +83,7 @@ class ProgressAnimator {
                 this.#lastProgress = this.#newProgress
                 const progressBar = genProgrBar(this.#newProgress, 20)
                 const spacing = " ".repeat(Math.floor(((22 * 1.95) - this.#text.length) / 2))
-                await this.#interaction.editReply(`\`\`\`ansi\n${spacing}${this.#text}\n${progressBar}\`\`\``)
+                await this.#interaction.editReply(`\`\`\`ansi\n${spacing}${this.#text} (${Math.floor(this.#newProgress * 100)})\n${progressBar}\`\`\``)
             }
         }, 1500)
     }
@@ -117,48 +118,3 @@ class ProgressAnimator {
         this.#interval = undefined
     }
 }
-
-/*
-class ProgressAnimator {
-    #interaction: ChatInputCommandInteraction
-    #timestamp: number = -Infinity
-    #progressRatio: number = 0
-    constructor(interaction: ChatInputCommandInteraction){
-        this.#interaction = interaction
-    }
-
-    async animate({ text, type, dataBuffer, frames }: { text: string, type: "ffmpeg" | "ytdlp", dataBuffer: Buffer, frames: number }){
-        if (dataBuffer === undefined) return
-        const data = dataBuffer.toString()
-
-        let newRatio = 0.0
-        if (type === "ytdlp") {
-            const processPercentage = parseInt(data.split("%")[0].trim())
-            if (!Number.isNaN(processPercentage)) newRatio = processPercentage / 100
-        } else if (type === "ffmpeg"){
-            const processedFrames = parseFloat(data.split("=")[1].trim())
-            if (!Number.isNaN(processedFrames)) newRatio = processedFrames / frames
-        }
-        if(newRatio >= this.#progressRatio) this.#progressRatio = newRatio
-
-        if(Date.now() - this.#timestamp < 1500) return
-        this.#timestamp = Date.now()
-
-        const progressBarLength = 40
-        const progressBars = new Array(progressBarLength).fill("#")
-        const spacing = " ".repeat(((progressBarLength + 2) - text.length) / 2)
-
-        const index = Math.floor((progressBarLength - 1) * this.#progressRatio)
-        const colorCode = index == (progressBarLength - 1) ? 32 : 34
-        progressBars[index] = index === 0 ? `[0m${progressBars[index]}` : `${progressBars[index]}[0m`
-
-        await this.#interaction.editReply(`\`\`\`ansi\n${spacing}${text}\n[[${colorCode}m${progressBars.join("")}[0m]\`\`\``)
-    }
-
-    resetProgress(){
-        this.#progressRatio = 0
-        this.#timestamp = -Infinity
-    }
-
-}
-*/
