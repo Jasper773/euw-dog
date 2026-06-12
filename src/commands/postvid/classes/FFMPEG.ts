@@ -147,6 +147,10 @@ class VideoProcessor {
         }
     }
 
+    static numberToEven(n: number){
+        return Math.floor(n / 2) * 2
+    }
+
     static lowerResolution({ width, height } : { width: number, height: number }){
         const biggestResolution = Math.max(width, height)
         const resolutionPoints = [640, 720, 1280]
@@ -159,8 +163,8 @@ class VideoProcessor {
         let closestDownResolution = VideoProcessor.getHighestLowerNumber(biggestResolution, resolutionPoints)
 
         return {
-            width: Math.floor(VideoProcessor.scaleDownResolution(width, biggestResolution, closestDownResolution)),
-            height: Math.floor(VideoProcessor.scaleDownResolution(height, biggestResolution, closestDownResolution))
+            width: VideoProcessor.numberToEven(Math.floor(VideoProcessor.scaleDownResolution(width, biggestResolution, closestDownResolution))),
+            height: VideoProcessor.numberToEven(Math.floor(VideoProcessor.scaleDownResolution(height, biggestResolution, closestDownResolution)))
         }
     }
 
