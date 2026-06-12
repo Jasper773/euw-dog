@@ -93,12 +93,15 @@ class ProgressAnimator {
         if (dataBuffer === undefined) return
         const data = dataBuffer.toString()
     
-        if (type === "ytdlp") {
-            const processPercentage = parseInt(data.split("%")[0].trim())
-            if (!Number.isNaN(processPercentage)) this.#newProgress = processPercentage / 100
-        } else if (type === "ffmpeg"){
-            const processedFrames = parseFloat(data.split("=")[1].trim())
-            if (!Number.isNaN(processedFrames)) this.#newProgress = processedFrames / frames
+        switch (type) {
+            case "ytdlp":
+                const processPercentage = parseInt(data.split("%")[0].trim())
+                if (!Number.isNaN(processPercentage)) this.#newProgress = processPercentage / 100
+                break
+            case "ffmpeg":
+                const processedFrames = parseFloat(data.split("=")[1].trim())
+                if (!Number.isNaN(processedFrames)) this.#newProgress = processedFrames / frames
+                break
         }
 
         this.#text = text
